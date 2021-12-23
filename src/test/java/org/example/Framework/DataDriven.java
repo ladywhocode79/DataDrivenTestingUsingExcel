@@ -15,14 +15,14 @@ import java.util.Iterator;
 
 public class DataDriven {
 
-    ArrayList<String> getData(String columnName) throws IOException {
+    ArrayList<String> getData(String columnName,String sheetName) throws IOException {
         ArrayList<String>cellArray = new ArrayList<String>();
         FileInputStream file = new FileInputStream
                 ("https://docs.google.com/spreadsheets/d/16QqlR0pnNeQnBQNr0y-V6hVuWxvRn988sliDgUBOOqA/edit?usp=sharing");
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         int noOfSheets = workbook.getNumberOfSheets();
         for(int i=0;i<noOfSheets;i++){
-            if(workbook.getSheetName(i).equalsIgnoreCase(columnName)){
+            if(workbook.getSheetName(i).equalsIgnoreCase(sheetName)){
             XSSFSheet sheet = workbook.getSheetAt(i);
                 Iterator<Row> rows = sheet.iterator();//sheet is collection of rows
                 Row firstRow = rows.next();
@@ -45,7 +45,7 @@ public class DataDriven {
                 //Once column is identified then scan entire testcase column to identify the purchase testcase row
                 while(rows.hasNext()){
                    Row r= rows.next();
-                    if(r.getCell(column).getStringCellValue().equalsIgnoreCase("Purchase")){
+                    if(r.getCell(column).getStringCellValue().equalsIgnoreCase(columnName)){
                         //once matched is found get all the data of rows or cell contents
                         Iterator<Cell> expectedCell =r.cellIterator();
                         while (expectedCell.hasNext()){

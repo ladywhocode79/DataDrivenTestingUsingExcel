@@ -7,7 +7,7 @@ public class TestSample {
     public static void main(String[] args) throws IOException {
         DataDriven dataDriven = new DataDriven();
         //get data from excel..we can use this data in any selenium element
-        ArrayList expectedRowData = dataDriven.getData("AddProfile");
+        ArrayList expectedRowData = dataDriven.getData("AddProfile","testdata");
         System.out.println(expectedRowData.get(0));
         System.out.println(expectedRowData.get(1));
         System.out.println(expectedRowData.get(2));
